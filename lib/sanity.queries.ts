@@ -76,3 +76,26 @@ export async function getAllCategories() {
     }`,
   )
 }
+
+export async function getPostsByCategory(categorySlug: string) {
+  return client.fetch(
+    `*[_type == "post" && category->slug.current == $categorySlug] | order(publishedAt desc) {
+      _id,
+      title,
+      slug,
+      excerpt,
+      featuredImage,
+      publishedAt,
+      "readTime": round(length(pt::text(content)) / 5 / 180),
+      category->{
+        title,
+        slug
+      },
+      author->{
+        name,
+        avatar
+      }
+    }`,
+    { categorySlug },
+  )
+}

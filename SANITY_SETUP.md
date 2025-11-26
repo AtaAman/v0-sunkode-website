@@ -136,4 +136,4 @@ Blog pages revalidate every hour (3600 seconds). You can adjust this in:
 - [Next.js + Sanity Guide](https://www.sanity.io/guides/nextjs-app-router)
 \`\`\`
 
-```json file="" isHidden
+\`\`\`json file="" isHidden
