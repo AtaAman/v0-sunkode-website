@@ -23,26 +23,14 @@ export function FinalCTASection() {
   }
 
   return (
-    <section className="relative py-16 md:py-24 lg:py-32 bg-gradient-to-br from-[#1E3A8A] via-[#2563EB] to-[#1E3A8A]  overflow-hidden">
-      {/* Grid Pattern Overlay */}
-      <div
-        className="absolute inset-0 opacity-20"
-        style={{
-          backgroundImage: `
-            linear-gradient(to right, rgba(255,255,255,0.1) 1px, transparent 1px),
-            linear-gradient(to bottom, rgba(255,255,255,0.1) 1px, transparent 1px)
-          `,
-          backgroundSize: "40px 40px",
-        }}
-      />
-
+    <section className="relative py-16 md:py-24 lg:py-32 bg-gradient-to-br from-[#219ebc] to-[#8ecae6] overflow-hidden">
       {/* Decorative Elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div
-          className={`absolute top-20 left-10 w-40 h-40 bg-[#F9A825]/20 rounded-full blur-3xl transition-all duration-1000 ${mounted ? "opacity-100" : "opacity-0"}`}
+          className={`absolute top-20 left-10 w-40 h-40 bg-white/10 rounded-full blur-3xl transition-all duration-1000 ${mounted ? "opacity-100" : "opacity-0"}`}
         />
         <div
-          className={`absolute bottom-20 right-10 w-40 h-40 bg-[#4CAF50]/20 rounded-full blur-3xl transition-all duration-1000 delay-300 ${mounted ? "opacity-100" : "opacity-0"}`}
+          className={`absolute bottom-20 right-10 w-40 h-40 bg-white/10 rounded-full blur-3xl transition-all duration-1000 delay-300 ${mounted ? "opacity-100" : "opacity-0"}`}
         />
         <div
           className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-white/5 rounded-full blur-3xl transition-all duration-1000 delay-500 ${mounted ? "opacity-100" : "opacity-0"}`}
@@ -65,7 +53,7 @@ export function FinalCTASection() {
           </h2>
 
           <p
-            className={`text-lg md:text-xl lg:text-2xl text-blue-100 text-pretty max-w-3xl mx-auto transition-all duration-700 delay-200 ${mounted ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4"}`}
+            className={`text-lg md:text-xl lg:text-2xl text-white text-pretty max-w-3xl mx-auto transition-all duration-700 delay-200 ${mounted ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4"}`}
           >
             Your customers don't wait — your proposals shouldn't either.
           </p>

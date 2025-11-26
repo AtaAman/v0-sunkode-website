@@ -6,7 +6,7 @@ export function StructuredData() {
     "@type": "Organization",
     name: "Sunkode",
     url: "https://sunkode.com",
-    logo: "https://sunkode.com/Sunkode-title.jpg",
+    logo: "https://sunkode.com/sunkodeLogo.png",
     description:
       "Professional solar proposal software for EPC companies and installers. Create accurate solar proposals in 60 seconds.",
     sameAs: [
@@ -20,6 +20,11 @@ export function StructuredData() {
       contactType: "Customer Service",
       areaServed: "IN",
       availableLanguage: ["English", "Hindi"],
+    },
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: "Mumbai",
+      addressCountry: "IN",
     },
   }
 
@@ -42,6 +47,11 @@ export function StructuredData() {
     },
     description: "Create professional solar proposals in 60 seconds. Solar design software for EPC companies.",
     screenshot: "https://sunkode.com/Sunkode-title.jpg",
+    author: {
+      "@type": "Organization",
+      name: "Sunkode",
+    },
+    datePublished: "2024-01-01",
   }
 
   const breadcrumbSchema = {
@@ -69,6 +79,37 @@ export function StructuredData() {
     },
   }
 
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: [
+      {
+        "@type": "Question",
+        name: "What is Sunkode?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Sunkode is a professional solar proposal software designed for EPC companies and installers to create accurate, branded solar proposals in just 60 seconds.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "How fast can I create a solar proposal?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "With Sunkode, you can create professional solar proposals in just 60 seconds, dramatically reducing the time from hours to minutes.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "Who is Sunkode built for?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Sunkode is specifically built for solar EPC companies and installers in India who need to create professional proposals quickly and efficiently.",
+        },
+      },
+    ],
+  }
+
   return (
     <>
       <Script
@@ -90,6 +131,11 @@ export function StructuredData() {
         id="website-schema"
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
+      />
+      <Script
+        id="faq-schema"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
     </>
   )

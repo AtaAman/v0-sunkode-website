@@ -46,27 +46,27 @@ export function TestimonialsSection() {
   return (
     <section
       id="testimonials"
-      className="relative py-16 md:py-24 lg:py-32 bg-gradient-to-br from-[#219ebc] to-[#8ecae6] overflow-hidden"
+      className="relative py-16 md:py-24 lg:py-32 bg-gradient-to-br from-white via-[#F9FAFB] to-[#FEF9F3] overflow-hidden"
     >
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-20 left-10 w-40 h-40 bg-white/5 rounded-full blur-3xl" />
-        <div className="absolute bottom-20 right-10 w-40 h-40 bg-white/5 rounded-full blur-3xl" />
+        <div className="absolute top-20 left-10 w-40 h-40 bg-[#2563EB]/10 rounded-full blur-3xl" />
+        <div className="absolute bottom-20 right-10 w-40 h-40 bg-[#4CAF50]/10 rounded-full blur-3xl" />
       </div>
 
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center mb-12 md:mb-16">
           <div
-            className={`inline-flex items-center gap-2 rounded-full bg-white/20 px-4 py-1.5 text-sm font-medium text-white border border-white/30 mb-4 transition-all duration-700 ${mounted ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4"}`}
+            className={`inline-flex items-center gap-2 rounded-full bg-[#2563EB]/15 px-4 py-1.5 text-sm font-medium text-[#1E3A8A] border border-[#2563EB]/30 mb-4 transition-all duration-700 ${mounted ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4"}`}
           >
             <span>Client Success Stories</span>
           </div>
           <h2
-            className={`font-bold text-3xl md:text-4xl lg:text-5xl text-white mb-3 md:mb-4 text-balance transition-all duration-700 delay-100 ${mounted ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4"}`}
+            className={`font-bold text-3xl md:text-4xl lg:text-5xl text-[#1E3A8A] mb-3 md:mb-4 text-balance transition-all duration-700 delay-100 ${mounted ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4"}`}
           >
             Trusted by Solar EPC Installers
           </h2>
           <p
-            className={`text-lg md:text-xl text-blue-100 text-pretty transition-all duration-700 delay-200 ${mounted ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4"}`}
+            className={`text-lg md:text-xl text-[#374151] text-pretty transition-all duration-700 delay-200 ${mounted ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4"}`}
           >
             Join hundreds of successful solar companies across India
           </p>

@@ -6,9 +6,10 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: "*",
         allow: "/",
-        disallow: ["/api/", "/admin/"],
+        disallow: ["/api/", "/admin/", "/studio/"],
       },
     ],
     sitemap: "https://sunkode.com/sitemap.xml",
+    host: "https://sunkode.com",
   }
 }

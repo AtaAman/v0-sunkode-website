@@ -53,12 +53,10 @@ export function Header() {
     <header className="sticky top-0 z-50 bg-white shadow-sm">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
-          {/* Logo */}
           <Link href="/">
             <Logo size="sm" />
           </Link>
 
-          {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center gap-6 lg:gap-8">
             <a
               href="/#features"
@@ -67,13 +65,12 @@ export function Header() {
             >
               Features
             </a>
-            <a
-              href="/#why-sunkode"
-              onClick={(e) => handleNavClick(e, "why-sunkode")}
+            <Link
+              href="/why-sunkode"
               className="text-sm font-medium text-gray-700 hover:text-[#023047] transition-colors"
             >
               Why Sunkode
-            </a>
+            </Link>
             <a
               href="/#testimonials"
               onClick={(e) => handleNavClick(e, "testimonials")}
@@ -81,13 +78,12 @@ export function Header() {
             >
               Case Studies
             </a>
-            <a
-              href="/#services"
-              onClick={(e) => handleNavClick(e, "services")}
+            <Link
+              href="/coming-soon"
               className="text-sm font-medium text-gray-700 hover:text-[#023047] transition-colors"
             >
-              Services
-            </a>
+              Coming Soon
+            </Link>
             <Link href="/blog" className="text-sm font-medium text-gray-700 hover:text-[#023047] transition-colors">
               Blog
             </Link>
@@ -102,13 +98,11 @@ export function Header() {
             </Button>
           </div>
 
-          {/* Mobile Menu Button */}
           <button className="md:hidden" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
             {mobileMenuOpen ? <X className="h-6 w-6 text-gray-700" /> : <Menu className="h-6 w-6 text-gray-700" />}
           </button>
         </div>
 
-        {/* Mobile Menu */}
         {mobileMenuOpen && (
           <div className="md:hidden py-4 space-y-4">
             <a
@@ -118,13 +112,13 @@ export function Header() {
             >
               Features
             </a>
-            <a
-              href="/#why-sunkode"
-              onClick={(e) => handleNavClick(e, "why-sunkode")}
+            <Link
+              href="/why-sunkode"
+              onClick={() => setMobileMenuOpen(false)}
               className="block text-sm font-medium text-gray-700 hover:text-[#023047]"
             >
               Why Sunkode
-            </a>
+            </Link>
             <a
               href="/#testimonials"
               onClick={(e) => handleNavClick(e, "testimonials")}
@@ -132,13 +126,13 @@ export function Header() {
             >
               Case Studies
             </a>
-            <a
-              href="/#services"
-              onClick={(e) => handleNavClick(e, "services")}
+            <Link
+              href="/coming-soon"
+              onClick={() => setMobileMenuOpen(false)}
               className="block text-sm font-medium text-gray-700 hover:text-[#023047]"
             >
-              Services
-            </a>
+              Coming Soon
+            </Link>
             <Link
               href="/blog"
               onClick={() => setMobileMenuOpen(false)}
