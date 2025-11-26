@@ -41,50 +41,31 @@ const features = [
 export function FeaturesSection() {
   const [mounted, setMounted] = useState(false)
   const scrollContainerRef = useRef<HTMLDivElement>(null)
-  const [isPaused, setIsPaused] = useState(false)
 
   useEffect(() => {
     setMounted(true)
   }, [])
 
-  useEffect(() => {
-    const scrollContainer = scrollContainerRef.current
-    if (!scrollContainer) return
-
-    let scrollInterval: NodeJS.Timeout
-
-    const startScroll = () => {
-      scrollInterval = setInterval(() => {
-        if (!isPaused && scrollContainer) {
-          const maxScroll = scrollContainer.scrollWidth - scrollContainer.clientWidth
-          const currentScroll = scrollContainer.scrollLeft
-
-          if (currentScroll >= maxScroll - 1) {
-            scrollContainer.scrollLeft = 0
-          } else {
-            scrollContainer.scrollLeft += 1
-          }
-        }
-      }, 30)
-    }
-
-    startScroll()
-
-    return () => {
-      clearInterval(scrollInterval)
-    }
-  }, [isPaused])
+  const getCardWidth = () => {
+    if (!scrollContainerRef.current) return 0
+    const card = scrollContainerRef.current.firstElementChild as HTMLElement
+    if (!card) return 0
+    // Get gap from computed style or estimate
+    const style = window.getComputedStyle(scrollContainerRef.current)
+    const gap = parseInt(style.columnGap || style.gap || "24")
+    return card.offsetWidth + gap
+  }
 
   const scrollToNext = () => {
     if (!scrollContainerRef.current) return
-    const cardWidth = 320 + 24 // card width + gap
-    scrollContainerRef.current.scrollBy({ left: cardWidth, behavior: "smooth" })
+    const width = getCardWidth()
+    scrollContainerRef.current.scrollBy({ left: width, behavior: "smooth" })
   }
 
   const scrollToPrev = () => {
     if (!scrollContainerRef.current) return
-    const cardWidth = 320 + 24 // card width + gap
-    scrollContainerRef.current.scrollBy({ left: -cardWidth, behavior: "smooth" })
+    const width = getCardWidth()
+    scrollContainerRef.current.scrollBy({ left: -width, behavior: "smooth" })
   }
 
   const handleGetStarted = () => {
@@ -133,8 +114,6 @@ export function FeaturesSection() {
 
         <div
           ref={scrollContainerRef}
-          onMouseEnter={() => setIsPaused(true)}
-          onMouseLeave={() => setIsPaused(false)}
           className="flex gap-4 md:gap-6 overflow-x-auto mb-8 md:mb-12 pb-4 snap-x snap-mandatory scroll-smooth [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
         >
           {features.map((feature, index) => {

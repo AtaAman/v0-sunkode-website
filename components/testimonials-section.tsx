@@ -2,8 +2,9 @@
 
 import { Card } from "@/components/ui/card"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { Star } from "lucide-react"
-import { useState, useEffect } from "react"
+import { Button } from "@/components/ui/button"
+import { Star, ChevronLeft, ChevronRight } from "lucide-react"
+import { useState, useEffect, useRef } from "react"
 
 const testimonials = [
   {
@@ -36,12 +37,33 @@ const testimonials = [
 ]
 
 export function TestimonialsSection() {
-  const [activeIndex, setActiveIndex] = useState(0)
   const [mounted, setMounted] = useState(false)
+  const scrollContainerRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     setMounted(true)
   }, [])
+
+  const getCardWidth = () => {
+    if (!scrollContainerRef.current) return 0
+    const card = scrollContainerRef.current.firstElementChild as HTMLElement
+    if (!card) return 0
+    const style = window.getComputedStyle(scrollContainerRef.current)
+    const gap = parseInt(style.columnGap || style.gap || "24")
+    return card.offsetWidth + gap
+  }
+
+  const scrollToNext = () => {
+    if (!scrollContainerRef.current) return
+    const width = getCardWidth()
+    scrollContainerRef.current.scrollBy({ left: width, behavior: "smooth" })
+  }
+
+  const scrollToPrev = () => {
+    if (!scrollContainerRef.current) return
+    const width = getCardWidth()
+    scrollContainerRef.current.scrollBy({ left: -width, behavior: "smooth" })
+  }
 
   return (
     <section
@@ -72,49 +94,67 @@ export function TestimonialsSection() {
           </p>
         </div>
 
-        <Card
-          className={`max-w-4xl mx-auto p-6 md:p-10 lg:p-12 mb-8 bg-white rounded-2xl shadow-2xl border-0 transition-all duration-700 delay-300 ${mounted ? "opacity-100 scale-100" : "opacity-0 scale-95"}`}
+        <div
+          ref={scrollContainerRef}
+          className="flex gap-4 md:gap-6 overflow-x-auto mb-8 md:mb-12 pb-4 snap-x snap-mandatory scroll-smooth [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
         >
-          <div className="flex gap-1 mb-6 justify-center">
-            {[...Array(testimonials[activeIndex].rating)].map((_, i) => (
-              <Star key={i} className="h-5 w-5 fill-[#F9A825] text-[#F9A825]" />
-            ))}
-          </div>
-
-          <blockquote className="text-lg md:text-xl lg:text-2xl text-[#111827] text-center mb-8 leading-relaxed text-balance font-normal">
-            "{testimonials[activeIndex].quote}"
-          </blockquote>
-
-          <div className="flex items-center justify-center gap-4">
-            <Avatar className="h-14 w-14 md:h-16 md:w-16 ring-4 ring-[#F9A825]/20">
-              <AvatarImage
-                src={testimonials[activeIndex].avatar || "/placeholder.svg"}
-                alt={testimonials[activeIndex].name}
-                className="object-cover"
-              />
-              <AvatarFallback className="bg-[#F9A825] text-white font-semibold">
-                {testimonials[activeIndex].name
-                  .split(" ")
-                  .map((n) => n[0])
-                  .join("")}
-              </AvatarFallback>
-            </Avatar>
-            <div className="text-left">
-              <div className="font-bold text-base md:text-lg text-[#1E3A8A]">{testimonials[activeIndex].name}</div>
-              <div className="text-sm md:text-base text-[#374151]">{testimonials[activeIndex].role}</div>
-              <div className="text-xs md:text-sm text-[#6B7280]">{testimonials[activeIndex].location}</div>
-            </div>
-          </div>
-        </Card>
-
-        <div className="flex justify-center gap-3">
-          {testimonials.map((_, index) => (
-            <button
+          {testimonials.map((testimonial, index) => (
+            <Card
               key={index}
-              onClick={() => setActiveIndex(index)}
-              className={`h-2.5 rounded-full transition-all duration-300 hover:scale-110 ${index === activeIndex ? "bg-white w-8" : "bg-white/40 w-2.5 hover:bg-white/60"}`}
-            />
+              className={`flex-shrink-0 w-[300px] md:w-[350px] lg:w-[400px] p-6 md:p-8 bg-white rounded-2xl shadow-lg border border-gray-100 hover:shadow-xl transition-all duration-300 snap-start ${mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}
+              style={{ transitionDelay: `${300 + index * 100}ms` }}
+            >
+              <div className="flex gap-1 mb-4">
+                {[...Array(testimonial.rating)].map((_, i) => (
+                  <Star key={i} className="h-4 w-4 fill-[#F9A825] text-[#F9A825]" />
+                ))}
+              </div>
+
+              <blockquote className="text-base md:text-lg text-[#111827] mb-6 leading-relaxed">
+                "{testimonial.quote}"
+              </blockquote>
+
+              <div className="flex items-center gap-4 mt-auto">
+                <Avatar className="h-10 w-10 md:h-12 md:w-12 ring-2 ring-[#F9A825]/20">
+                  <AvatarImage
+                    src={testimonial.avatar || "/placeholder.svg"}
+                    alt={testimonial.name}
+                    className="object-cover"
+                  />
+                  <AvatarFallback className="bg-[#F9A825] text-white font-semibold">
+                    {testimonial.name
+                      .split(" ")
+                      .map((n) => n[0])
+                      .join("")}
+                  </AvatarFallback>
+                </Avatar>
+                <div>
+                  <div className="font-bold text-sm md:text-base text-[#1E3A8A]">{testimonial.name}</div>
+                  <div className="text-xs md:text-sm text-[#374151]">{testimonial.role}</div>
+                  <div className="text-xs text-[#6B7280]">{testimonial.location}</div>
+                </div>
+              </div>
+            </Card>
           ))}
+        </div>
+
+        <div className="flex items-center justify-center gap-4">
+          <Button
+            onClick={scrollToPrev}
+            size="icon"
+            variant="outline"
+            className="h-10 w-10 rounded-full bg-white border-gray-200 text-gray-700 hover:bg-gray-50 hover:border-gray-300 transition-all shadow-sm"
+          >
+            <ChevronLeft className="h-5 w-5" />
+          </Button>
+          <Button
+            onClick={scrollToNext}
+            size="icon"
+            variant="outline"
+            className="h-10 w-10 rounded-full bg-white border-gray-200 text-gray-700 hover:bg-gray-50 hover:border-gray-300 transition-all shadow-sm"
+          >
+            <ChevronRight className="h-5 w-5" />
+          </Button>
         </div>
       </div>
     </section>
