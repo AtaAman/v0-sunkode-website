@@ -1,0 +1,15 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background gradient -->
+  <defs>
+    <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#fb8500;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#ffb703;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Rounded rectangle background -->
+  <rect width="512" height="512" rx="100" fill="url(#grad)"/>
+  
+  <!-- SK text -->
+  <text x="256" y="320" font-family="Arial, sans-serif" font-weight="bold" font-size="280" fill="white" text-anchor="middle">SK</text>
+</svg>

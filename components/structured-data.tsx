@@ -6,17 +6,17 @@ export function StructuredData() {
     "@type": "Organization",
     name: "Sunkode",
     url: "https://sunkode.com",
-    logo: "https://sunkode.com/logo.png",
+    logo: "https://sunkode.com/Sunkode-title.jpg",
     description:
       "Professional solar proposal software for EPC companies and installers. Create accurate solar proposals in 60 seconds.",
     sameAs: [
       "https://www.linkedin.com/company/sunkode",
-      "https://twitter.com/sunkode",
-      "https://www.facebook.com/sunkode",
+      "https://www.instagram.com/sun_kode/",
+      "https://www.facebook.com/profile.php?id=61582344062437",
     ],
     contactPoint: {
       "@type": "ContactPoint",
-      telephone: "+91-XXX-XXX-XXXX",
+      telephone: "+91-98765-43210",
       contactType: "Customer Service",
       areaServed: "IN",
       availableLanguage: ["English", "Hindi"],
@@ -41,7 +41,7 @@ export function StructuredData() {
       ratingCount: "150",
     },
     description: "Create professional solar proposals in 60 seconds. Solar design software for EPC companies.",
-    screenshot: "https://sunkode.com/og-image.jpg",
+    screenshot: "https://sunkode.com/Sunkode-title.jpg",
   }
 
   const breadcrumbSchema = {

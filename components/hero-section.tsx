@@ -11,17 +11,28 @@ export function HeroSection() {
     setMounted(true)
   }, [])
 
+  const handleGetStarted = () => {
+    window.open("https://www.sunkode.com/login", "_blank")
+  }
+
+  const handleScheduleDemo = () => {
+    const phoneNumber = "919876543210"
+    const message = "Hi! I'd like to schedule a demo of Sunkode."
+    const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`
+    window.open(url, "_blank")
+  }
+
   return (
-    <section className="relative bg-gradient-to-br from-white via-[#FEF9F3] to-[#FFF4E6] py-12 md:py-20 lg:py-28 overflow-hidden">
+    <section className="relative bg-gradient-to-br from-white via-[#F0F9FF] to-[#E0F2FE] py-12 md:py-20 lg:py-28 overflow-hidden">
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div
-          className={`absolute top-20 left-10 w-32 h-32 bg-[#F9A825]/10 rounded-full blur-3xl transition-all duration-1000 ${mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}
+          className={`absolute top-20 left-10 w-32 h-32 bg-[#8ecae6]/20 rounded-full blur-3xl transition-all duration-1000 ${mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}
         />
         <div
-          className={`absolute bottom-40 right-20 w-40 h-40 bg-[#2563EB]/10 rounded-full blur-3xl transition-all duration-1000 delay-300 ${mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}
+          className={`absolute bottom-40 right-20 w-40 h-40 bg-[#219ebc]/20 rounded-full blur-3xl transition-all duration-1000 delay-300 ${mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}
         />
         <div
-          className={`absolute top-1/2 right-1/3 w-24 h-24 bg-[#4CAF50]/10 rounded-full blur-2xl transition-all duration-1000 delay-500 ${mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}
+          className={`absolute top-1/2 right-1/3 w-24 h-24 bg-[#ffb703]/15 rounded-full blur-2xl transition-all duration-1000 delay-500 ${mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}
         />
       </div>
 
@@ -30,17 +41,17 @@ export function HeroSection() {
           {/* Left Content */}
           <div className="space-y-5 lg:space-y-7">
             <div
-              className={`inline-flex items-center gap-2 rounded-full bg-[#F9A825]/15 px-4 py-1.5 text-sm font-medium text-[#1E3A8A] border border-[#F9A825]/30 transition-all duration-700 ${mounted ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4"}`}
+              className={`inline-flex items-center gap-2 rounded-full bg-[#ffb703]/15 px-4 py-1.5 text-sm font-medium text-[#023047] border border-[#ffb703]/30 transition-all duration-700 ${mounted ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4"}`}
             >
-              <Sparkles className="h-4 w-4 text-[#F9A825] animate-pulse" />
+              <Sparkles className="h-4 w-4 text-[#ffb703] animate-pulse" />
               <span>Transform Your Solar Business</span>
             </div>
 
             <h1
               className={`font-normal text-3xl sm:text-4xl md:text-5xl lg:text-5xl text-[#111827] leading-tight transition-all duration-700 delay-100 ${mounted ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4"}`}
             >
-              Create Solar Proposals <span className="text-[#1E3A8A]">in 60 Seconds</span>{" "}
-              <span className="italic font-light text-[#F9A825] block mt-1">or Less</span>
+              Create Solar Proposals <span className="text-[#023047]">in 60 Seconds</span>{" "}
+              <span className="italic font-light text-[#ffb703] block mt-1">or Less</span>
             </h1>
 
             <p
@@ -54,16 +65,18 @@ export function HeroSection() {
               className={`flex flex-col sm:flex-row gap-3 pt-2 transition-all duration-700 delay-300 ${mounted ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4"}`}
             >
               <Button
+                onClick={handleGetStarted}
                 size="lg"
-                className="bg-[#F9A825] text-white hover:bg-[#FB8C00] font-semibold text-base px-6 py-5 rounded-lg shadow-lg shadow-[#F9A825]/30 transition-all hover:shadow-xl hover:shadow-[#F9A825]/40 hover:-translate-y-1 hover:scale-105"
+                className="bg-[#fb8500] text-white hover:bg-[#ffb703] font-semibold text-base px-6 py-5 rounded-lg shadow-lg shadow-[#fb8500]/30 transition-all hover:shadow-xl hover:shadow-[#fb8500]/40 hover:-translate-y-1 hover:scale-105"
               >
                 Get Started
                 <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
               </Button>
               <Button
+                onClick={handleScheduleDemo}
                 size="lg"
                 variant="outline"
-                className="border-2 border-[#1E3A8A] text-[#1E3A8A] hover:bg-[#1E3A8A] hover:text-white font-semibold text-base px-6 py-5 rounded-lg bg-white transition-all hover:-translate-y-1 hover:scale-105"
+                className="border-2 border-[#023047] text-[#023047] hover:bg-[#023047] hover:text-white font-semibold text-base px-6 py-5 rounded-lg bg-white transition-all hover:-translate-y-1 hover:scale-105"
               >
                 Schedule Demo
               </Button>
@@ -91,7 +104,7 @@ export function HeroSection() {
               }}
             >
               <div className="flex items-center gap-2">
-                <div className="w-8 h-8 rounded-full bg-[#4CAF50] flex items-center justify-center animate-pulse">
+                <div className="w-8 h-8 rounded-full bg-[#219ebc] flex items-center justify-center animate-pulse">
                   <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                   </svg>

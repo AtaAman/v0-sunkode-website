@@ -4,11 +4,12 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  /* SunCode Brand Colors */
-  --solar-yellow: #f9a825;
-  --deep-blue: #1e3a8a;
-  --royal-blue: #2563eb;
-  --herbal-green: #4caf50;
+  /* Updated to new brand color palette */
+  --light-cyan: #8ecae6;
+  --medium-teal: #219ebc;
+  --dark-navy: #023047;
+  --golden-yellow: #ffb703;
+  --orange: #fb8500;
 
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
@@ -70,6 +71,7 @@
   --chart-3: oklch(0.769 0.188 70.08);
   --chart-4: oklch(0.627 0.265 303.9);
   --chart-5: oklch(0.645 0.246 16.439);
+  --radius: 0.625rem;
   --sidebar: oklch(0.205 0 0);
   --sidebar-foreground: oklch(0.985 0 0);
   --sidebar-primary: oklch(0.488 0.243 264.376);
@@ -148,5 +150,9 @@
   }
   body {
     @apply bg-background text-foreground;
+  }
+  /* Added smooth scroll behavior for anchor links */
+  html {
+    scroll-behavior: smooth;
   }
 }

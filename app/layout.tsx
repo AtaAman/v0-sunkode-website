@@ -2,6 +2,7 @@ import type React from "react"
 import type { Metadata, Viewport } from "next"
 import { Poppins } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
+import { WhatsAppWidget } from "@/components/whatsapp-widget"
 import "./globals.css"
 
 // Updated font to Poppins as specified in design brief
@@ -49,7 +50,7 @@ export const metadata: Metadata = {
       "Deliver branded, professional solar proposals instantly and close deals faster. Built for EPC companies and installers.",
     images: [
       {
-        url: "/og-image.jpg",
+        url: "/Sunkode-title.jpg",
         width: 1200,
         height: 630,
         alt: "Sunkode Solar Proposal Software",
@@ -61,7 +62,7 @@ export const metadata: Metadata = {
     title: "Sunkode - Create Solar Proposals in 60 Seconds",
     description:
       "Deliver branded, professional solar proposals instantly and close deals faster. Built for EPC companies and installers.",
-    images: ["/og-image.jpg"],
+    images: ["/Sunkode-title.jpg"],
     creator: "@sunkode",
   },
   robots: {
@@ -79,11 +80,11 @@ export const metadata: Metadata = {
   icons: {
     icon: [
       {
-        url: "/icon-light-32x32.png",
+        url: "/icon-light-32x32.jpg",
         media: "(prefers-color-scheme: light)",
       },
       {
-        url: "/icon-dark-32x32.png",
+        url: "/icon-dark-32x32.jpg",
         media: "(prefers-color-scheme: dark)",
       },
       {
@@ -91,7 +92,7 @@ export const metadata: Metadata = {
         type: "image/svg+xml",
       },
     ],
-    apple: "/apple-icon.png",
+    apple: "/apple-icon.jpg",
   },
   verification: {
     google: "your-google-verification-code",
@@ -101,8 +102,8 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#F9A825" },
-    { media: "(prefers-color-scheme: dark)", color: "#1E3A8A" },
+    { media: "(prefers-color-scheme: light)", color: "#fb8500" },
+    { media: "(prefers-color-scheme: dark)", color: "#023047" },
   ],
   width: "device-width",
   initialScale: 1,
@@ -119,6 +120,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${poppins.variable} font-sans antialiased`}>
         {children}
+        <WhatsAppWidget />
         <Analytics />
       </body>
     </html>

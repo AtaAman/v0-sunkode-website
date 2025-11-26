@@ -1,56 +1,105 @@
 "use client"
 
+import type React from "react"
 import { Button } from "@/components/ui/button"
 import { Menu, X } from "lucide-react"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import Link from "next/link"
+import { useRouter, usePathname } from "next/navigation"
+import { Logo } from "@/components/logo"
 
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const router = useRouter()
+  const pathname = usePathname()
+
+  useEffect(() => {
+    if (window.location.hash) {
+      const id = window.location.hash.slice(1)
+      setTimeout(() => {
+        const element = document.getElementById(id)
+        if (element) {
+          element.scrollIntoView({ behavior: "smooth" })
+        }
+      }, 100)
+    }
+  }, [pathname])
+
+  const handleBookDemo = () => {
+    const phoneNumber = "919876543210"
+    const message = "Hi! I'd like to book a free demo of Sunkode."
+    const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`
+    window.open(url, "_blank")
+  }
+
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, hash: string) => {
+    e.preventDefault()
+    setMobileMenuOpen(false)
+
+    if (pathname === "/") {
+      // Same page - smooth scroll
+      const element = document.getElementById(hash)
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" })
+        window.history.pushState(null, "", `#${hash}`)
+      }
+    } else {
+      // Different page - navigate to home with hash
+      router.push(`/#${hash}`)
+    }
+  }
 
   return (
     <header className="sticky top-0 z-50 bg-white shadow-sm">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-2">
-            <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-gradient-to-br from-[#F9A825] to-[#FB8C00]">
-              <span className="font-bold text-base text-white">SK</span>
-            </div>
-            <span className="font-bold text-lg md:text-xl text-[#1E3A8A]">Sunkode</span>
+          <Link href="/">
+            <Logo size="sm" />
           </Link>
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center gap-6 lg:gap-8">
-            <a href="/#features" className="text-sm font-medium text-gray-700 hover:text-[#1E3A8A] transition-colors">
+            <a
+              href="/#features"
+              onClick={(e) => handleNavClick(e, "features")}
+              className="text-sm font-medium text-gray-700 hover:text-[#023047] transition-colors"
+            >
               Features
             </a>
             <a
               href="/#why-sunkode"
-              className="text-sm font-medium text-gray-700 hover:text-[#1E3A8A] transition-colors"
+              onClick={(e) => handleNavClick(e, "why-sunkode")}
+              className="text-sm font-medium text-gray-700 hover:text-[#023047] transition-colors"
             >
               Why Sunkode
             </a>
             <a
               href="/#testimonials"
-              className="text-sm font-medium text-gray-700 hover:text-[#1E3A8A] transition-colors"
+              onClick={(e) => handleNavClick(e, "testimonials")}
+              className="text-sm font-medium text-gray-700 hover:text-[#023047] transition-colors"
             >
               Case Studies
             </a>
-            <a href="/#services" className="text-sm font-medium text-gray-700 hover:text-[#1E3A8A] transition-colors">
+            <a
+              href="/#services"
+              onClick={(e) => handleNavClick(e, "services")}
+              className="text-sm font-medium text-gray-700 hover:text-[#023047] transition-colors"
+            >
               Services
             </a>
-            <Link href="/blog" className="text-sm font-medium text-gray-700 hover:text-[#1E3A8A] transition-colors">
+            <Link href="/blog" className="text-sm font-medium text-gray-700 hover:text-[#023047] transition-colors">
               Blog
             </Link>
-            <a href="/#contact" className="text-sm font-medium text-gray-700 hover:text-[#1E3A8A] transition-colors">
+            <Link href="/contact" className="text-sm font-medium text-gray-700 hover:text-[#023047] transition-colors">
               Contact
-            </a>
+            </Link>
           </nav>
 
-          {/* CTA Button */}
           <div className="hidden md:block">
-            <Button className="bg-[#F9A825] text-white hover:bg-[#FB8C00] font-semibold">Book Demo</Button>
+            <Button onClick={handleBookDemo} className="bg-[#fb8500] text-white hover:bg-[#ffb703] font-semibold">
+              Book Demo
+            </Button>
           </div>
 
           {/* Mobile Menu Button */}
@@ -62,25 +111,54 @@ export function Header() {
         {/* Mobile Menu */}
         {mobileMenuOpen && (
           <div className="md:hidden py-4 space-y-4">
-            <a href="/#features" className="block text-sm font-medium text-gray-700 hover:text-[#1E3A8A]">
+            <a
+              href="/#features"
+              onClick={(e) => handleNavClick(e, "features")}
+              className="block text-sm font-medium text-gray-700 hover:text-[#023047]"
+            >
               Features
             </a>
-            <a href="/#why-sunkode" className="block text-sm font-medium text-gray-700 hover:text-[#1E3A8A]">
+            <a
+              href="/#why-sunkode"
+              onClick={(e) => handleNavClick(e, "why-sunkode")}
+              className="block text-sm font-medium text-gray-700 hover:text-[#023047]"
+            >
               Why Sunkode
             </a>
-            <a href="/#testimonials" className="block text-sm font-medium text-gray-700 hover:text-[#1E3A8A]">
+            <a
+              href="/#testimonials"
+              onClick={(e) => handleNavClick(e, "testimonials")}
+              className="block text-sm font-medium text-gray-700 hover:text-[#023047]"
+            >
               Case Studies
             </a>
-            <a href="/#services" className="block text-sm font-medium text-gray-700 hover:text-[#1E3A8A]">
+            <a
+              href="/#services"
+              onClick={(e) => handleNavClick(e, "services")}
+              className="block text-sm font-medium text-gray-700 hover:text-[#023047]"
+            >
               Services
             </a>
-            <Link href="/blog" className="block text-sm font-medium text-gray-700 hover:text-[#1E3A8A]">
+            <Link
+              href="/blog"
+              onClick={() => setMobileMenuOpen(false)}
+              className="block text-sm font-medium text-gray-700 hover:text-[#023047]"
+            >
               Blog
             </Link>
-            <a href="/#contact" className="block text-sm font-medium text-gray-700 hover:text-[#1E3A8A]">
+            <Link
+              href="/contact"
+              onClick={() => setMobileMenuOpen(false)}
+              className="block text-sm font-medium text-gray-700 hover:text-[#023047]"
+            >
               Contact
-            </a>
-            <Button className="w-full bg-[#F9A825] text-white hover:bg-[#FB8C00] font-semibold">Book Demo</Button>
+            </Link>
+            <Button
+              onClick={handleBookDemo}
+              className="w-full bg-[#fb8500] text-white hover:bg-[#ffb703] font-semibold"
+            >
+              Book Demo
+            </Button>
           </div>
         )}
       </div>
