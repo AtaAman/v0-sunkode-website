@@ -23,7 +23,7 @@ export function FinalCTASection() {
   }
 
   return (
-    <section className="relative py-16 md:py-24 lg:py-32 bg-gradient-to-br from-[#219ebc] to-[#8ecae6] overflow-hidden">
+    <section className="relative py-16 md:py-24 lg:py-32 bg-gradient-to-br from-[#1E3A8A] via-[#2563EB] to-[#1E3A8A]  overflow-hidden">
       {/* Grid Pattern Overlay */}
       <div
         className="absolute inset-0 opacity-20"

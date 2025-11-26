@@ -14,7 +14,7 @@ export function ProblemSolutionSection() {
   return (
     <section
       id="why-sunkode"
-      className="relative py-12 md:py-20 lg:py-28 bg-gradient-to-br from-white via-[#FEF9F3] to-[#FFF4E6] overflow-hidden"
+      className="relative py-12 md:py-20 lg:py-28 bg-gradient-to-br from-[#1E3A8A] via-[#2563EB] to-[#1E3A8A] overflow-hidden"
     >
       {/* Floating Background Elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -29,19 +29,19 @@ export function ProblemSolutionSection() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center mb-8 md:mb-12 lg:mb-16 space-y-4">
           <div
-            className={`inline-flex items-center gap-2 rounded-full bg-[#F9A825]/15 px-4 py-1.5 text-sm font-medium text-[#1E3A8A] border border-[#F9A825]/30 transition-all duration-700 ${mounted ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4"}`}
+            className={`inline-flex items-center gap-2 rounded-full bg-[#F9A825]/10 px-4 py-1.5 text-sm font-medium text-[#F9A825] border border-[#F9A825]/20 transition-all duration-700 ${mounted ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4"}`}
           >
             <Sparkles className="h-4 w-4 text-[#F9A825]" />
             <span>Why Sunkode</span>
           </div>
 
           <h2
-            className={`font-normal text-3xl md:text-4xl lg:text-5xl text-[#111827] leading-tight transition-all duration-700 delay-100 ${mounted ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4"}`}
+            className={`font-normal text-3xl md:text-4xl lg:text-5xl text-white leading-tight transition-all duration-700 delay-100 ${mounted ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4"}`}
           >
             Still Using Manual Methods?
           </h2>
           <p
-            className={`text-base md:text-lg text-[#374151] text-pretty max-w-2xl mx-auto transition-all duration-700 delay-200 ${mounted ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4"}`}
+            className={`text-base md:text-lg text-blue-100 text-pretty max-w-2xl mx-auto transition-all duration-700 delay-200 ${mounted ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4"}`}
           >
             It's time to upgrade your proposal process
           </p>
