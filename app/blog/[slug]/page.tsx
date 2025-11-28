@@ -20,8 +20,9 @@ export async function generateStaticParams() {
   }))
 }
 
-export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
-  const post: Post = await getPostBySlug(params.slug)
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const { slug } = await params
+  const post: Post = await getPostBySlug(slug)
 
   if (!post) {
     return {
@@ -116,8 +117,9 @@ const portableTextComponents = {
   },
 }
 
-export default async function BlogPostPage({ params }: { params: { slug: string } }) {
-  const post: Post = await getPostBySlug(params.slug)
+export default async function BlogPostPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params
+  const post: Post = await getPostBySlug(slug)
 
   if (!post) {
     notFound()
@@ -151,7 +153,9 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
       <Header />
       <main>
         {/* Hero Section */}
-        <section className="relative overflow-hidden bg-gradient-to-br from-[#2563EB] to-[#1E3A8A] py-12 md:py-16">
+        {/* Hero Section */}
+        {/* Hero Section */}
+        <section className="relative overflow-hidden bg-gradient-to-br from-[#2563EB] to-[#1E3A8A] py-10 md:py-14">
           {/* Grid pattern background */}
           <div
             className="absolute inset-0 opacity-20"
@@ -164,82 +168,87 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
             }}
           />
 
-          <div className="container mx-auto px-4 max-w-4xl relative z-10">
+          <div className="container mx-auto px-4 max-w-6xl relative z-10">
             {/* Back Button */}
             <Link href="/blog">
-              <Button variant="ghost" className="mb-8 -ml-4 hover:bg-white/10 text-white font-medium">
+              <Button variant="ghost" className="mb-6 -ml-4 hover:bg-white/10 text-white font-medium h-8 text-sm">
                 <ArrowLeft className="w-4 h-4 mr-2" />
                 Back to Blog
               </Button>
             </Link>
 
-            {/* Category Badge */}
-            {post.category && (
-              <Badge className="mb-6 bg-[#F9A825] text-white hover:bg-[#f9a825e6] px-4 py-1.5 text-sm font-bold uppercase tracking-wide border-0">
-                {post.category.title}
-              </Badge>
-            )}
-
-            {/* Title */}
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-8 leading-tight text-balance">
-              {post.title}
-            </h1>
-
-            {/* Author Card */}
-            <div className="flex flex-wrap items-center gap-6 mb-8">
-              <div className="flex items-center gap-4">
-                {post.author.avatar ? (
-                  <Image
-                    src={urlForImage(post.author.avatar) || "/placeholder.svg"}
-                    alt={post.author.name}
-                    width={56}
-                    height={56}
-                    className="rounded-full ring-2 ring-white/30"
-                  />
-                ) : (
-                  <div className="w-14 h-14 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center text-white font-bold text-xl ring-2 ring-white/30">
-                    {post.author.name.charAt(0)}
-                  </div>
+            <div className="grid lg:grid-cols-2 gap-10 items-center">
+              <div>
+                {/* Category Badge */}
+                {post.category && (
+                  <Badge className="mb-4 bg-[#F9A825] text-white hover:bg-[#f9a825e6] px-3 py-1 text-xs font-bold uppercase tracking-wide border-0">
+                    {post.category.title}
+                  </Badge>
                 )}
-                <div>
-                  <p className="font-bold text-white text-lg">{post.author.name}</p>
-                  <p className="text-sm text-blue-100">Copywriter</p>
+
+                {/* Title */}
+                <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6 leading-tight text-balance">
+                  {post.title}
+                </h1>
+
+                {/* Author Card */}
+                <div className="flex flex-wrap items-center gap-5">
+                  <div className="flex items-center gap-3">
+                    {post.author.avatar ? (
+                      <Image
+                        src={urlForImage(post.author.avatar) || "/placeholder.svg"}
+                        alt={post.author.name}
+                        width={40}
+                        height={40}
+                        className="rounded-full ring-2 ring-white/30"
+                      />
+                    ) : (
+                      <div className="w-10 h-10 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center text-white font-bold text-lg ring-2 ring-white/30">
+                        {post.author.name.charAt(0)}
+                      </div>
+                    )}
+                    <div>
+                      <p className="font-bold text-white text-base">{post.author.name}</p>
+                      <p className="text-xs text-blue-100">Copywriter</p>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-4 text-xs text-blue-100">
+                    <div className="flex items-center gap-1.5">
+                      <Calendar className="w-3.5 h-3.5" />
+                      <span>
+                        {new Date(post.publishedAt).toLocaleDateString("en-US", {
+                          month: "long",
+                          day: "numeric",
+                          year: "numeric",
+                        })}
+                      </span>
+                    </div>
+                    <div className="flex items-center gap-1.5">
+                      <Clock className="w-3.5 h-3.5" />
+                      <span>{post.readTime} min read</span>
+                    </div>
+                  </div>
                 </div>
               </div>
-              <div className="flex items-center gap-6 text-sm text-blue-100">
-                <div className="flex items-center gap-2">
-                  <Calendar className="w-4 h-4" />
-                  <span>
-                    {new Date(post.publishedAt).toLocaleDateString("en-US", {
-                      month: "long",
-                      day: "numeric",
-                      year: "numeric",
-                    })}
-                  </span>
+
+              {/* Featured Image in Hero */}
+              {post.featuredImage && (
+                <div className="relative w-full h-[250px] md:h-[350px] rounded-xl overflow-hidden shadow-2xl ring-4 ring-white/10">
+                  <Image
+                    src={urlForImage(post.featuredImage) || "/placeholder.svg"}
+                    alt={post.title}
+                    fill
+                    className="object-cover"
+                  />
                 </div>
-                <div className="flex items-center gap-2">
-                  <Clock className="w-4 h-4" />
-                  <span>{post.readTime} min read</span>
-                </div>
-              </div>
+              )}
             </div>
           </div>
         </section>
 
         {/* Content Section */}
-        <article className="py-12 md:py-16 bg-white">
+        <article className="py-10 md:py-14 bg-white">
           <div className="container mx-auto px-4 max-w-4xl">
-            {/* Featured Image */}
-            {post.featuredImage && (
-              <div className="relative w-full h-[400px] md:h-[560px] rounded-2xl overflow-hidden mb-14 shadow-2xl -mt-24">
-                <Image
-                  src={urlForImage(post.featuredImage) || "/placeholder.svg"}
-                  alt={post.title}
-                  fill
-                  className="object-cover"
-                />
-              </div>
-            )}
 
             {/* Content - Enhanced typography */}
             <div className="prose prose-lg prose-gray max-w-none">
